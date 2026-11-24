@@ -20,8 +20,6 @@ Static, defensive-only PE triage tool written in MASM for Windows x64. The utili
 ```
 asm/                # MASM sources
   include/          # Shared structs and constants
-tools/              # Example binaries (populate with your test PE files)
-tests/              # Future Python-based regression tests
 README.md           # This document
 ```
 
@@ -36,7 +34,7 @@ cd asm
 ml64 /c /nologo /Fo peinspector.obj peinspector.asm
 link /nologo /subsystem:console /entry:main /out:peinspector.exe peinspector.obj kernel32.lib shell32.lib msvcrt.lib
 ```
-Place the resulting `peinspector.exe` at the repo root or wherever convenient.
+Run the resulting `peinspector.exe` from the `asm` directory. The examples below assume local paths to existing PE files.
 
 ## Usage
 ```
@@ -44,8 +42,8 @@ peinspector.exe <path-to-pe> [--json | --csv] [--warn-threshold=<float>]
 ```
 Examples:
 ```batch
-peinspector.exe tools\hello64.exe --json > reports\hello.json
-peinspector.exe tools\upx-packed.exe --csv > reports\packed.csv
+peinspector.exe C:\Windows\System32\notepad.exe --json > notepad.json
+peinspector.exe C:\Windows\System32\notepad.exe --csv > notepad.csv
 peinspector.exe C:\Windows\System32\kernel32.dll --warn-threshold=7.0
 ```
 Exit codes reflect the highest triggered heuristic (0/1/2).
